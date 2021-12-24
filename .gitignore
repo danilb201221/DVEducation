@@ -1,0 +1,23 @@
+# Compiled class file
+*.class
+classes/
+
+# Log file
+*.log
+
+# Testing files and directories
+Test/
+
+# Temp files
+out/
+.idea
+build/
+
+# Local files
+*.iml
+*.pdf
+*.pptx
+*.odp
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
