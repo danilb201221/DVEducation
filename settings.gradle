@@ -1,0 +1,5 @@
+rootProject.name = 'DVEducation'
+
+include  'homework'
+include  'homework:consoleapp'
+include  'homework:domain'

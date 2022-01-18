@@ -1,0 +1,9 @@
+apply plugin: 'application'
+
+
+dependencies {
+    implementation "joda-time:joda-time:2.2"
+    testImplementation "junit:junit:4.12"
+    implementation  'log4j:log4j:1.2.17'
+    implementation project(':homework:domain')
+}
