@@ -8,19 +8,19 @@ import java.util.Map;
 
 public class LessonsRepository {
 
-    private Map<Integer, Lesson> AllLessons = new HashMap<Integer, Lesson>();
+    private Map<Integer, Lesson> allLessons = new HashMap<Integer, Lesson>();
 
     public void addNewLesson(Course course, Lesson lesson) {
-        AllLessons.put(lesson.hashCode(), lesson);
+        allLessons.put(lesson.hashCode(), lesson);
         course.setIdLesson(lesson.hashCode());
     }
 
     public String toString(Integer hash) {
-        return AllLessons.get(hash).toString();
+        return allLessons.get(hash).toString();
     }
 
     public Lesson getLesson(Integer hash, int num) throws LessonNotFoundException {
-        Lesson lesson = AllLessons.get(hash);
+        Lesson lesson = allLessons.get(hash);
         if (lesson.getNum() == num) {
             return lesson;
         } else {

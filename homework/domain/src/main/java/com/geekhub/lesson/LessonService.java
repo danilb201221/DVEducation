@@ -9,7 +9,11 @@ import java.time.LocalDateTime;
 public class LessonService {
 
 
-    LessonsRepository lessonsRepository = new LessonsRepository();
+    private final LessonsRepository lessonsRepository;
+
+    public LessonService(LessonsRepository lessonsRepository) {
+        this.lessonsRepository = lessonsRepository;
+    }
 
 
     public StringBuilder displayLessonsList(Course course) {

@@ -6,8 +6,13 @@ import com.geekhub.person.PersonService;
 
 public class PersonConsole {
 
-    MainConsole mainConsole = new MainConsole();
-    PersonService personService = new PersonService();
+    private final ScannerHelper scannerHelper;
+    private final PersonService personService;
+
+    public PersonConsole(ScannerHelper scannerHelper, PersonService personService) {
+        this.scannerHelper = scannerHelper;
+        this.personService = personService;
+    }
 
     public Person getLecturer(Course course, int numLecturer) {
         return personService.getLecturer(course, numLecturer);
@@ -30,41 +35,41 @@ public class PersonConsole {
 
     public void addNewStudent(Course course) {
         System.out.println("Add first name");
-        String firstName = mainConsole.getString();
+        String firstName = scannerHelper.getString();
         System.out.println("Add last name");
-        String lastName = mainConsole.getString();
+        String lastName = scannerHelper.getString();
         System.out.println("Add contacts");
-        String contacts = mainConsole.getString();
+        String contacts = scannerHelper.getString();
         System.out.println("Add E-Mail");
-        String email = mainConsole.getString();
+        String email = scannerHelper.getString();
         personService.addNewStudent(course, firstName, lastName, contacts, email);
     }
 
     public void addNewLecturer(Course course) {
         System.out.println("Add first name");
-        String firstName = mainConsole.getString();
+        String firstName = scannerHelper.getString();
         System.out.println("Add last name");
-        String lastName = mainConsole.getString();
+        String lastName = scannerHelper.getString();
         System.out.println("Add contacts");
-        String contacts = mainConsole.getString();
+        String contacts = scannerHelper.getString();
         System.out.println("Add E-Mail");
-        String email = mainConsole.getString();
+        String email = scannerHelper.getString();
         personService.addNewLecturer(course, firstName, lastName, contacts, email);
     }
 
-    public void delStudent(Course course) {
+    public void deleteStudent(Course course) {
         System.out.println("Enter first name");
-        String firstName = mainConsole.getString();
+        String firstName = scannerHelper.getString();
         System.out.println("Enter last name");
-        String lastName = mainConsole.getString();
+        String lastName = scannerHelper.getString();
         personService.delStudent(course, firstName, lastName);
     }
 
-    public void delLecturer(Course course) {
+    public void deleteLecturer(Course course) {
         System.out.println("Enter first name");
-        String firstName = mainConsole.getString();
+        String firstName = scannerHelper.getString();
         System.out.println("Enter last name");
-        String lastName = mainConsole.getString();
+        String lastName = scannerHelper.getString();
         personService.delLecturer(course, firstName, lastName);
     }
 }

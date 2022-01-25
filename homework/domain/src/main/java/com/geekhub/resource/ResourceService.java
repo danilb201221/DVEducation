@@ -4,7 +4,11 @@ import com.geekhub.lesson.Lesson;
 
 public class ResourceService {
 
-    ResourceRepository resourceRepository = new ResourceRepository();
+    private final ResourceRepository resourceRepository;
+
+    public ResourceService(ResourceRepository resourceRepository) {
+        this.resourceRepository = resourceRepository;
+    }
 
     public void addNewResource(Lesson lesson, ResourceType resourceType, String name, String data) {
         Resource resource = new Resource(resourceType, name, data);

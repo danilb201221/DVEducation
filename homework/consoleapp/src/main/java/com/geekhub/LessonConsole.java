@@ -10,10 +10,17 @@ import java.time.LocalDateTime;
 
 public class LessonConsole {
 
-    MainConsole mainConsole = new MainConsole();
-    LessonService lessonService = new LessonService();
-    PersonConsole personConsole = new PersonConsole();
-    DateTimeConsole dateConsole = new DateTimeConsole();
+    private final ScannerHelper scannerHelper;
+    private final LessonService lessonService;
+    private final PersonConsole personConsole;
+    private final DateTimeConsole dateTimeConsole;
+
+    public LessonConsole(ScannerHelper scannerHelper, LessonService lessonService, PersonConsole personConsole, DateTimeConsole dateTimeConsole) {
+        this.scannerHelper = scannerHelper;
+        this.lessonService = lessonService;
+        this.personConsole = personConsole;
+        this.dateTimeConsole = dateTimeConsole;
+    }
 
     public void displayLessonsList(Course course) {
         System.out.println(lessonService.displayLessonsList(course));
@@ -21,29 +28,29 @@ public class LessonConsole {
 
     public void addNewLesson(Course course) {
         System.out.println("Add number");
-        int num = mainConsole.getInt();
+        int num = scannerHelper.getInt();
         System.out.println("Add name");
-        String name = mainConsole.getString();
+        String name = scannerHelper.getString();
         System.out.println("Add description");
-        String description = mainConsole.getString();
-        LocalDateTime date = dateConsole.addLocalDateTime();
+        String description = scannerHelper.getString();
+        LocalDateTime date = dateTimeConsole.addLocalDateTime();
         System.out.println("Add lecturer\n" +
             personConsole.getLecturersList(course));
-        int numLecturer = mainConsole.getInt();
+        int numLecturer = scannerHelper.getInt();
         Person lecturer = personConsole.getLecturer(course, numLecturer);
 
         lessonService.addNewLesson(course, num, name, description, date, lecturer);
     }
 
 
-    public void delLesson(Course course) {
+    public void deleteLesson(Course course) {
         lessonService.delLesson(course);
     }
 
-    public Lesson getLesson(Course course) {
+    public Lesson getLesson(ScannerHelper scannerHelper, Course course) {
         System.out.println("Enter the number of the lesson you want to get");
         displayLessonsList(course);
-        int num = mainConsole.getInt();
+        int num = this.scannerHelper.getInt();
         Lesson lesson = null;
         try {
             lesson = lessonService.getLesson(course, num);

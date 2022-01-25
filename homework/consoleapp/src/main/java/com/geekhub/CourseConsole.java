@@ -5,28 +5,33 @@ import com.geekhub.course.CourseService;
 
 public class CourseConsole {
 
-    MainConsole mainConsole = new MainConsole();
-    CourseService courseService = new CourseService();
+private final ScannerHelper scannerHelper;
+private final CourseService courseService;
+
+    public CourseConsole(ScannerHelper scannerHelper, CourseService courseService) {
+        this.scannerHelper = scannerHelper;
+        this.courseService = courseService;
+    }
 
     public void displayCoursesList() {
-        System.out.println(courseService.displayCoursesList());
+        System.out.println(courseService.getCoursesList());
     }
 
     public void addNewCourse() {
         System.out.println("Add name course");
-        String name = mainConsole.getString();
+        String name = scannerHelper.getString();
         courseService.addNewCourse(name);
     }
 
-    public void delCourse() {
+    public void deleteCourse() {
         System.out.println("Enter the number of the course you want to delete");
-        int id = mainConsole.getInt()-1;
-        courseService.delCourse(id);
+        int id = scannerHelper.getInt()-1;
+        courseService.deleteCourse(id);
     }
 
     public Course getCourse() {
         System.out.println("Enter the number of the course you want to get");
-        int id = mainConsole.getInt()-1;
+        int id = scannerHelper.getInt()-1;
         return courseService.getCourseByNumber(id);
     }
 }

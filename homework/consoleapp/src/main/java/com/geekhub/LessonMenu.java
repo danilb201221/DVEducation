@@ -4,9 +4,15 @@ import com.geekhub.lesson.Lesson;
 
 public class LessonMenu {
 
-    MainConsole mainConsole = new MainConsole();
-    ResourceConsole resourceConsole = new ResourceConsole();
-    HomeWorkConsole homeWorkConsole = new HomeWorkConsole();
+    private final ScannerHelper scannerHelper;
+    private final ResourceConsole resourceConsole;
+    private final HomeWorkConsole homeWorkConsole;
+
+    public LessonMenu(ScannerHelper scannerHelper, ResourceConsole resourceConsole, HomeWorkConsole homeWorkConsole) {
+        this.scannerHelper = scannerHelper;
+        this.resourceConsole = resourceConsole;
+        this.homeWorkConsole = homeWorkConsole;
+    }
 
     private void printMenuLesson() {
         System.out.println("\nWhat would you like to do? Choose the option you want\n"
@@ -23,18 +29,18 @@ public class LessonMenu {
         String countMenu;
         do {
             printMenuLesson();
-            countMenu = mainConsole.getString();
+            countMenu = scannerHelper.getString();
             switch (countMenu) {
                 case "1" -> resourceConsole.addResource(lesson);
                 case "2" -> homeWorkConsole.addHomeWork(lesson);
-                case "3" -> resourceConsole.delResource(lesson);
-                case "4" -> homeWorkConsole.delHomeWork(lesson);
+                case "3" -> resourceConsole.deleteResource(lesson);
+                case "4" -> homeWorkConsole.deleteHomeWork(lesson);
                 case "5" -> resourceConsole.displayResourcesList(lesson);
                 case "6" -> homeWorkConsole.displayHomeWorkList(lesson);
                 case "7" -> {
                     break;
                 }
-                default -> mainConsole.notAvailable();
+                default -> scannerHelper.notAvailable();
             }
         } while (countMenu == "7");
     }
