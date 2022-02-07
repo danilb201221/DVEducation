@@ -9,7 +9,7 @@ public class CourseConsole {
     CourseService courseService = new CourseService();
 
     public void displayCoursesList() {
-        System.out.println(courseService.displayCoursesList());
+        System.out.println(courseService.getCoursesList());
     }
 
     public void addNewCourse() {

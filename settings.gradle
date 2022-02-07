@@ -1,5 +1,6 @@
-rootProject.name = 'DVEducation'
+rootProject.name = 'geekhub-11-DanilBilyk'
 
 include  'homework'
 include  'homework:consoleapp'
 include  'homework:domain'
+include  'homework:webapp'

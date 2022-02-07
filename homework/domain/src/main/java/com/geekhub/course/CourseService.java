@@ -5,7 +5,7 @@ public class CourseService {
     CourseRepository courseRepository = new CourseRepository();
 
 
-    public StringBuilder displayCoursesList() {
+    public StringBuilder getCoursesList() {
         StringBuilder result = new StringBuilder();
         int num = 1;
         for (int i = 0; i < courseRepository.getLastIndex(); i++) {
