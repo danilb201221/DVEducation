@@ -4,12 +4,14 @@ import com.geekhub.course.Course;
 
 public class PersonService {
 
-    StudentsRepository studentsRepository = new StudentsRepository();
-    LecturersRepository lecturersRepository = new LecturersRepository();
+    private final StudentsRepository studentsRepository;
+    private final LecturersRepository lecturersRepository;
 
     private Person person;
 
-    public PersonService() {
+    public PersonService(StudentsRepository studentsRepository, LecturersRepository lecturersRepository) {
+        this.studentsRepository = studentsRepository;
+        this.lecturersRepository = lecturersRepository;
         this.person = new Person();
     }
 

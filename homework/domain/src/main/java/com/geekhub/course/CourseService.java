@@ -2,32 +2,32 @@ package com.geekhub.course;
 
 public class CourseService {
 
-    CourseRepository courseRepository = new CourseRepository();
+    private final CourseRepository courseRepository;
+
+    public CourseService(CourseRepository courseRepository) {
+        this.courseRepository = courseRepository;
+    }
 
 
     public StringBuilder getCoursesList() {
         StringBuilder result = new StringBuilder();
         int num = 1;
-        for (int i = 0; i < courseRepository.getLastIndex(); i++) {
-            if (courseRepository.notNullID(i)) {
-                result.append(num + ". " + courseRepository.toString(i));
-                num++;
-            } else {
-                continue;
-            }
+        for (int i = 0; i < courseRepository.getCourses().size(); i++) {
+            result.append(num + ". " + courseRepository.getCourses().get(i).toString());
+            num++;
         }
         return result;
     }
 
     public void addNewCourse(String name) {
-        courseRepository.addNewCourse(name);
+        courseRepository.getCourses().add(courseRepository.getCourses().size(), new Course(name));
     }
 
-    public void delCourse(int id) {
-        courseRepository.delCourse(id);
+    public void deleteCourse(int index) {
+        courseRepository.getCourses().remove(index);
     }
 
-    public Course getCourseByNumber(int id) {
-        return courseRepository.getCourse(id);
+    public Course getCourseByNumber(int index) {
+        return courseRepository.getCourse(index);
     }
 }

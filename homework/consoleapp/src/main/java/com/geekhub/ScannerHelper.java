@@ -2,12 +2,16 @@ package com.geekhub;
 
 import java.util.Scanner;
 
-public class MainConsole {
+public class ScannerHelper {
 
     private Scanner sc;
 
     public void notAvailable() {
         System.out.println("This command is not available");
+    }
+
+    public ScannerHelper() {
+        this.sc = new Scanner(System.in);
     }
 
     public Scanner getScanner() {
@@ -22,7 +26,7 @@ public class MainConsole {
     }
 
     public int getInt() {
-        return sc.nextInt();
+        return getScanner().nextInt();
     }
 
     public void scannerClose() {

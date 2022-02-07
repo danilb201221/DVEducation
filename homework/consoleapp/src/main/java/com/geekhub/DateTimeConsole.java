@@ -6,13 +6,18 @@ import java.time.LocalDateTime;
 
 public class DateTimeConsole {
 
-    MainConsole mainConsole = new MainConsole();
-    DateTimeService dateService = new DateTimeService();
+    private final ScannerHelper scannerHelper;
+    private final DateTimeService dateTimeService;
+
+    public DateTimeConsole(ScannerHelper scannerHelper, DateTimeService dateTimeService) {
+        this.scannerHelper = scannerHelper;
+        this.dateTimeService = dateTimeService;
+    }
 
     public LocalDateTime addLocalDateTime() {
-        System.out.println("Enter date in format: '" + dateService.getDateFormat() + "'");
-        String strDate = mainConsole.getString();
-        return dateService.strToLDT(strDate);
+        System.out.println("Enter date in format: '" + dateTimeService.getDateFormat() + "'");
+        String strDate = scannerHelper.getString();
+        return dateTimeService.strToLDT(strDate);
     }
 
 }
