@@ -6,13 +6,8 @@ import com.geekhub.person.PersonService;
 
 public class PersonConsole {
 
-    private final ScannerHelper scannerHelper;
-    private final PersonService personService;
-
-    public PersonConsole(ScannerHelper scannerHelper, PersonService personService) {
-        this.scannerHelper = scannerHelper;
-        this.personService = personService;
-    }
+    ScannerHelper scannerHelper = new ScannerHelper();
+    PersonService personService = new PersonService();
 
     public Person getLecturer(Course course, int numLecturer) {
         return personService.getLecturer(course, numLecturer);
@@ -62,7 +57,7 @@ public class PersonConsole {
         String firstName = scannerHelper.getString();
         System.out.println("Enter last name");
         String lastName = scannerHelper.getString();
-        personService.delStudent(course, firstName, lastName);
+        personService.deleteStudent(course, firstName, lastName);
     }
 
     public void deleteLecturer(Course course) {
@@ -70,6 +65,6 @@ public class PersonConsole {
         String firstName = scannerHelper.getString();
         System.out.println("Enter last name");
         String lastName = scannerHelper.getString();
-        personService.delLecturer(course, firstName, lastName);
+        personService.deleteLecturer(course, firstName, lastName);
     }
 }

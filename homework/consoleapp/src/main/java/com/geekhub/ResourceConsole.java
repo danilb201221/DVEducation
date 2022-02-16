@@ -6,20 +6,15 @@ import com.geekhub.resource.ResourceType;
 
 public class ResourceConsole {
 
-    private final ScannerHelper scannerHelper;
-    private final ResourceService resourceService;
-
-    public ResourceConsole(ScannerHelper scannerHelper, ResourceService resourceService) {
-        this.scannerHelper = scannerHelper;
-        this.resourceService = resourceService;
-    }
+    ScannerHelper scannerHelper = new ScannerHelper();
+    ResourceService resourceService = new ResourceService();
 
     public void addResource(Lesson lesson) {
         ResourceType resourceType = null;
         System.out.println("Chose type resource:\n" +
-            "1. url" +
-            "2. book" +
-            "3. video");
+            "1. Url\n" +
+            "2. Book\n" +
+            "3. Video\n");
         String menu = scannerHelper.getString();
         switch (menu) {
             case "1" -> resourceType = ResourceType.valueOf("URL");
@@ -40,7 +35,7 @@ public class ResourceConsole {
     public void deleteResource(Lesson lesson) {
         System.out.println("Get name resource");
         String name = scannerHelper.getString();
-        resourceService.delResource(lesson, name);
+        resourceService.deleteResource(lesson, name);
     }
 
 

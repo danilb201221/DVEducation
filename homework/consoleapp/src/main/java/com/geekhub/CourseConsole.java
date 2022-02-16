@@ -2,36 +2,48 @@ package com.geekhub;
 
 import com.geekhub.course.Course;
 import com.geekhub.course.CourseService;
+import com.geekhub.exeptions.CourseNotFoundException;
 
 public class CourseConsole {
 
-private final ScannerHelper scannerHelper;
-private final CourseService courseService;
-
-    public CourseConsole(ScannerHelper scannerHelper, CourseService courseService) {
-        this.scannerHelper = scannerHelper;
-        this.courseService = courseService;
-    }
+    ScannerHelper scannerHelper = new ScannerHelper();
+    CourseService courseService = new CourseService();
 
     public void displayCoursesList() {
-        System.out.println(courseService.getCoursesList());
+        for (int i = 0; i < courseService.getCoursesList().size(); i++) {
+            System.out.println(courseService.getCoursesList().get(i));
+
+        }
     }
 
     public void addNewCourse() {
         System.out.println("Add name course");
-        String name = scannerHelper.getString();
-        courseService.addNewCourse(name);
+        String nameCourse = scannerHelper.getString();
+        try {
+            courseService.addNewCourse(nameCourse);
+        } catch (Exception e) {
+            System.err.println("Unexpected error");
+        }
     }
 
-    public void deleteCourse() {
+    public void deleteCourse() throws IndexOutOfBoundsException, UnsupportedOperationException {
         System.out.println("Enter the number of the course you want to delete");
-        int id = scannerHelper.getInt()-1;
-        courseService.deleteCourse(id);
+        int index = scannerHelper.getInt() - 1;
+        try {
+            courseService.deleteCourse(index);
+            System.out.println("Course deleted");
+        } catch (IndexOutOfBoundsException e) {
+            System.err.println("Course with this number does not exist");
+        } catch (Exception e) {
+            System.err.println("Unexpected error");
+        }
     }
 
-    public Course getCourse() {
+    public Course getCourse() throws NullPointerException, IndexOutOfBoundsException, CourseNotFoundException {
+        Course course;
         System.out.println("Enter the number of the course you want to get");
-        int id = scannerHelper.getInt()-1;
-        return courseService.getCourseByNumber(id);
+        int index = scannerHelper.getInt() - 1;
+        course = courseService.getCourse(index);
+        return course;
     }
 }

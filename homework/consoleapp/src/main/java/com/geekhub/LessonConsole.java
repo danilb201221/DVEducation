@@ -7,57 +7,69 @@ import com.geekhub.lesson.LessonService;
 import com.geekhub.person.Person;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 public class LessonConsole {
 
-    private final ScannerHelper scannerHelper;
-    private final LessonService lessonService;
-    private final PersonConsole personConsole;
-    private final DateTimeConsole dateTimeConsole;
-
-    public LessonConsole(ScannerHelper scannerHelper, LessonService lessonService, PersonConsole personConsole, DateTimeConsole dateTimeConsole) {
-        this.scannerHelper = scannerHelper;
-        this.lessonService = lessonService;
-        this.personConsole = personConsole;
-        this.dateTimeConsole = dateTimeConsole;
-    }
+    ScannerHelper scannerHelper = new ScannerHelper();
+    LessonService lessonService = new LessonService();
+    PersonConsole personConsole = new PersonConsole();
+    DateTimeConsole dateConsole = new DateTimeConsole();
 
     public void displayLessonsList(Course course) {
-        System.out.println(lessonService.displayLessonsList(course));
+        for (int i = 0; i < lessonService.getLessonsList(course).size(); i++) {
+            System.out.println(lessonService.getLessonsList(course).get(i));
+        }
     }
 
     public void addNewLesson(Course course) {
-        System.out.println("Add number");
-        int num = scannerHelper.getInt();
-        System.out.println("Add name");
-        String name = scannerHelper.getString();
-        System.out.println("Add description");
-        String description = scannerHelper.getString();
-        LocalDateTime date = dateTimeConsole.addLocalDateTime();
-        System.out.println("Add lecturer\n" +
-            personConsole.getLecturersList(course));
-        int numLecturer = scannerHelper.getInt();
-        Person lecturer = personConsole.getLecturer(course, numLecturer);
+        try {
+            System.out.println("Add number");
+            int number = scannerHelper.getInt();
 
-        lessonService.addNewLesson(course, num, name, description, date, lecturer);
+            System.out.println("Add name");
+            String name = scannerHelper.getString();
+
+            System.out.println("Add description");
+            String description = scannerHelper.getString();
+
+            LocalDateTime date = dateConsole.addLocalDateTime();
+
+            System.out.println("Add lecturer\n" +
+                personConsole.getLecturersList(course));
+            int numLecturer = scannerHelper.getInt();
+
+            Person lecturer = personConsole.getLecturer(course, numLecturer);
+
+            lessonService.addNewLesson(course, number, name, description, date, lecturer);
+
+        } catch (DateTimeParseException e) {
+            System.out.println("Incorrect date-time format");
+
+        } catch (Exception e) {
+            System.err.println("Unexpected error");
+        }
     }
 
 
     public void deleteLesson(Course course) {
-        lessonService.delLesson(course);
+        System.out.println("Enter the number of the lesson you want to delete");
+        int index = scannerHelper.getInt() - 1;
+        try {
+            lessonService.deleteLesson(course, index);
+        } catch (IndexOutOfBoundsException e) {
+            System.err.println("Lesson with this number does not exist");
+        } catch (UnsupportedOperationException e) {
+            System.err.println("Unexpected error");
+        }
     }
 
-    public Lesson getLesson(ScannerHelper scannerHelper, Course course) {
+    public Lesson getLesson(Course course) throws LessonNotFoundException, NoSuchElementException {
         System.out.println("Enter the number of the lesson you want to get");
         displayLessonsList(course);
-        int num = this.scannerHelper.getInt();
-        Lesson lesson = null;
-        try {
-            lesson = lessonService.getLesson(course, num);
-        } catch (LessonNotFoundException e) {
-            System.err.println("Lesson not found");
-            e.printStackTrace();
-        }
-        return lesson;
+        int number = scannerHelper.getInt();
+        return lessonService.getLesson(course, number);
     }
 }

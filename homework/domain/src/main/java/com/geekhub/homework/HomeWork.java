@@ -31,4 +31,11 @@ public class HomeWork {
     public String getName() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        return "Name: " + name + "\n" +
+            "Task: " + task + "\n" +
+            "Dead Line: " + deadLine;
+    }
 }

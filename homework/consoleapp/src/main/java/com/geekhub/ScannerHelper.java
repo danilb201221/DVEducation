@@ -1,5 +1,6 @@
 package com.geekhub;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ScannerHelper {
@@ -26,11 +27,19 @@ public class ScannerHelper {
     }
 
     public int getInt() {
-        return getScanner().nextInt();
+        int _int = 0;
+        try {
+            _int = getScanner().nextInt();
+        } catch (InputMismatchException e) {
+            System.err.println("Invalid value, please enter a number");
+            sc = null;
+            _int = getInt();
+        }
+        return _int;
     }
 
     public void scannerClose() {
-        sc.close();
+        getScanner().close();
     }
 
 }

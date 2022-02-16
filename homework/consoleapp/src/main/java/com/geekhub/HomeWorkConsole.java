@@ -4,27 +4,25 @@ import com.geekhub.homework.HomeWorkService;
 import com.geekhub.lesson.Lesson;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 public class HomeWorkConsole {
 
-    private final ScannerHelper scannerHelper;
-    private final HomeWorkService homeWorkService;
-    private final DateTimeConsole dateTimeConsole;
-
-    public HomeWorkConsole(ScannerHelper scannerHelper, HomeWorkService homeWorkService, DateTimeConsole dateTimeConsole) {
-        this.scannerHelper = scannerHelper;
-        this.homeWorkService = homeWorkService;
-        this.dateTimeConsole = dateTimeConsole;
-    }
+    ScannerHelper scannerHelper = new ScannerHelper();
+    HomeWorkService homeWorkService = new HomeWorkService();
+    DateTimeConsole dateTimeConsole = new DateTimeConsole();
 
     public void addHomeWork(Lesson lesson) {
         System.out.println("Add name");
         String name = scannerHelper.getString();
         System.out.println("Add task");
         String task = scannerHelper.getString();
-        LocalDateTime ldt = dateTimeConsole.addLocalDateTime();
-
-        homeWorkService.addHomeWork(lesson, name, task, ldt);
+        try {
+            LocalDateTime ldt = dateTimeConsole.addLocalDateTime();
+            homeWorkService.addHomeWork(lesson, name, task, ldt);
+        } catch (DateTimeParseException e) {
+            System.out.println("Incorrect date-time format");
+        }
     }
 
     public void displayHomeWorkList(Lesson lesson) {

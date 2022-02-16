@@ -10,13 +10,12 @@ public class StudentsRepository {
     private Map<Integer, Person> students = new HashMap<>();
 
     public String toString(Integer hash) {
-        String result = students.get(hash).toString();
-        return result;
+        return students.get(hash).toString();
     }
 
     public void addStudent(Course course, Person student) {
         students.put(student.hashCode(), student);
-        course.setIdStudent(student.hashCode());
+        course.getIdStudents().add(student.hashCode());
     }
 
     public Map<Integer, Person> getStudents() {

@@ -1,23 +1,21 @@
 package com.geekhub.person;
 
 import com.geekhub.course.Course;
+import com.geekhub.exeptions.PersonNotFoundException;
 
 public class PersonService {
 
-    private final StudentsRepository studentsRepository;
-    private final LecturersRepository lecturersRepository;
+    StudentsRepository studentsRepository = new StudentsRepository();
+    LecturersRepository lecturersRepository = new LecturersRepository();
 
     private Person person;
 
-    public PersonService(StudentsRepository studentsRepository, LecturersRepository lecturersRepository) {
-        this.studentsRepository = studentsRepository;
-        this.lecturersRepository = lecturersRepository;
+    public PersonService() {
         this.person = new Person();
     }
 
     public String toString() {
-        String toString = person.getFirstName() + " " + person.getLastName();
-        return toString;
+        return person.getFirstName() + " " + person.getLastName();
     }
 
     public StringBuilder getStudentsList(Course course) {
@@ -48,7 +46,7 @@ public class PersonService {
         lecturersRepository.addLecturer(course, lecturer);
     }
 
-    public void delStudent(Course course, String firstName, String lastName) {
+    public void deleteStudent(Course course, String firstName, String lastName) {
         for (int i = 0; i < course.getIdStudents().size(); i++) {
             Integer hash = course.getIdStudents().get(i);
             if (studentsRepository.getStudents().get(hash).getFirstName().equals(firstName)) {
@@ -65,7 +63,15 @@ public class PersonService {
         return lecturersRepository.getLecturers().get(i);
     }
 
-    public void delLecturer(Course course, String firstName, String lastName) {
+    public Person getLecturer(int lecturerIndex) throws PersonNotFoundException {
+        if ((lecturersRepository.getLecturers().get(lecturerIndex) != null) && (lecturersRepository.getLecturers().size() < lecturerIndex)) {
+            return lecturersRepository.getLecturers().get(lecturerIndex);
+        } else {
+            throw new PersonNotFoundException();
+        }
+    }
+
+    public void deleteLecturer(Course course, String firstName, String lastName) {
         for (int i = 0; i < course.getIdLecturers().size(); i++) {
             Integer hash = course.getIdLecturers().get(i);
             if (lecturersRepository.getLecturers().get(hash).getFirstName().equals(firstName)) {

@@ -19,4 +19,9 @@ public class LessonNotFoundException extends Exception{
     public LessonNotFoundException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
+
+    @Override
+    public String toString() {
+        return "Lesson not found";
+    }
 }

@@ -4,29 +4,26 @@ import com.geekhub.lesson.Lesson;
 
 public class LessonMenu {
 
-    private final ScannerHelper scannerHelper;
-    private final ResourceConsole resourceConsole;
-    private final HomeWorkConsole homeWorkConsole;
-
-    public LessonMenu(ScannerHelper scannerHelper, ResourceConsole resourceConsole, HomeWorkConsole homeWorkConsole) {
-        this.scannerHelper = scannerHelper;
-        this.resourceConsole = resourceConsole;
-        this.homeWorkConsole = homeWorkConsole;
-    }
+    ScannerHelper scannerHelper = new ScannerHelper();
+    ResourceConsole resourceConsole = new ResourceConsole();
+    HomeWorkConsole homeWorkConsole = new HomeWorkConsole();
 
     private void printMenuLesson() {
-        System.out.println("\nWhat would you like to do? Choose the option you want\n"
-            + "1. Add resource\n"
-            + "2. Add homework\n"
-            + "3. Delete resource\n"
-            + "4. Delete homework\n"
-            + "5. Show resources\n"
-            + "6. Show homework(-s)\n"
-            + "7. Back");
+        System.out.println("""
+
+            What would you like to do? Choose the option you want
+            1. Add resource
+            2. Add homework
+            3. Delete resource
+            4. Delete homework
+            5. Show resources
+            6. Show homework(-s)
+            7. Back""");
     }
 
     public void menuLesson(Lesson lesson) {
         String countMenu;
+        boolean exitMenu = false;
         do {
             printMenuLesson();
             countMenu = scannerHelper.getString();
@@ -37,11 +34,9 @@ public class LessonMenu {
                 case "4" -> homeWorkConsole.deleteHomeWork(lesson);
                 case "5" -> resourceConsole.displayResourcesList(lesson);
                 case "6" -> homeWorkConsole.displayHomeWorkList(lesson);
-                case "7" -> {
-                    break;
-                }
+                case "7" -> exitMenu = true;
                 default -> scannerHelper.notAvailable();
             }
-        } while (countMenu == "7");
+        } while (!exitMenu);
     }
 }

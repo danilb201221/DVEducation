@@ -12,7 +12,13 @@ public class Course {
     public Course(String name) {
         this.name = name;
         this.idLessons = new ArrayList<>();
+        this.idStudents = new ArrayList<>();
+        this.idLecturers = new ArrayList<>();
+    }
 
+    @Override
+    public String toString() {
+        return name;
     }
 
     public String getName() {
@@ -27,19 +33,23 @@ public class Course {
         return idLessons;
     }
 
-    public void setIdLesson(Integer idLesson) {
-        this.idLessons.add(idLesson);
+    public void setIdLessons(List<Integer> idLessons) {
+        this.idLessons = idLessons;
     }
 
     public List<Integer> getIdStudents() {
         return idStudents;
     }
 
-    public void setIdStudent(Integer idStudent) {
-        this.idStudents.add(idStudent);
+    public void setIdStudents(List<Integer> idStudents) {
+        this.idStudents = idStudents;
     }
 
     public List<Integer> getIdLecturers() {
         return idLecturers;
+    }
+
+    public void setIdLecturers(List<Integer> idLecturers) {
+        this.idLecturers = idLecturers;
     }
 }

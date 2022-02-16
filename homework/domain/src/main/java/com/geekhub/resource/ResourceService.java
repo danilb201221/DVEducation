@@ -4,15 +4,12 @@ import com.geekhub.lesson.Lesson;
 
 public class ResourceService {
 
-    private final ResourceRepository resourceRepository;
-
-    public ResourceService(ResourceRepository resourceRepository) {
-        this.resourceRepository = resourceRepository;
-    }
+    ResourceRepository resourceRepository = new ResourceRepository();
 
     public void addNewResource(Lesson lesson, ResourceType resourceType, String name, String data) {
         Resource resource = new Resource(resourceType, name, data);
-        resourceRepository.addNewResource(lesson, resource);
+        resourceRepository.getResources().put(resource.hashCode(), resource);
+        lesson.getIdResources().add(resource.hashCode());
     }
 
     public StringBuilder getResourcesList(Lesson lesson) {
@@ -24,7 +21,7 @@ public class ResourceService {
         return result;
     }
 
-    public void delResource(Lesson lesson, String name) {
+    public void deleteResource(Lesson lesson, String name) {
         for (int i = 0; i < lesson.getIdResources().size(); i++) {
             Integer hash = lesson.getIdResources().get(i);
             if (resourceRepository.getResources().get(hash).getName().equals(name)) {

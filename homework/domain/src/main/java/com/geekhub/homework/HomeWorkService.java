@@ -6,11 +6,7 @@ import java.time.LocalDateTime;
 
 public class HomeWorkService {
 
-    private final HomeWorkRepository homeWorkRepository;
-
-    public HomeWorkService(HomeWorkRepository homeWorkRepository) {
-        this.homeWorkRepository = homeWorkRepository;
-    }
+    HomeWorkRepository homeWorkRepository = new HomeWorkRepository();
 
     public void addHomeWork(Lesson lesson, String name, String task, LocalDateTime ldt) {
         HomeWork homeWork = new HomeWork(name, task, ldt);

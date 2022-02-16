@@ -7,16 +7,16 @@ public class Resource {
     private String data;
 
 
+    @Override
     public String toString() {
-        String toString = String.format("Type: %s Name: %s\n", type, name);
-        return toString;
+        return String.format("Type: %s Name: %s\n", type, name);
     }
 
-    public Resource(){
+    public Resource() {
 
     }
 
-    public Resource(ResourceType resourceType, String name, String data){
+    public Resource(ResourceType resourceType, String name, String data) {
         this.type = resourceType;
         this.name = name;
         this.data = data;
