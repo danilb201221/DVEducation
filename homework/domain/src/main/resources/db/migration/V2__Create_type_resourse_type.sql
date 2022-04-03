@@ -1,0 +1,1 @@
+CREATE TYPE IF NOT EXISTS resource_type AS ENUM ('URL', 'BOOK', 'VIDEO');

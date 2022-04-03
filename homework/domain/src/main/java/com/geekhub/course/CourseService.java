@@ -2,7 +2,6 @@ package com.geekhub.course;
 
 import com.geekhub.exeptions.CourseNotFoundException;
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class CourseService {
 
@@ -11,26 +10,26 @@ public class CourseService {
 
     public ArrayList<String> getCoursesList() {
         ArrayList<String> result = new ArrayList<>();
-        for (int i = 0; i < courseRepository.getCourses().size(); i++) {
-            String course = (i+1) + ". " + courseRepository.getCourses().get(i).getName();
+        for (int i = 0; i < courseRepository.getCoursesList().size(); i++) {
+            String course = (i+1) + ". " + courseRepository.getCoursesList().get(i).getName();
             result.add(course);
         }
         return result;
     }
 
     public void addNewCourse(String name) {
-        courseRepository.getCourses().add(new Course(name));
+        courseRepository.getCoursesList().add(new CourseImpl(name));
     }
 
     public void deleteCourse(int index) throws IndexOutOfBoundsException, UnsupportedOperationException {
-        courseRepository.getCourses().remove(index);
+        courseRepository.getCoursesList().remove(index);
     }
 
-    public Course getCourse(int index) throws CourseNotFoundException {
-        Course course;
-        if ((courseRepository.getCourses().get(index) != null) && (courseRepository.getCourses().size() > index)) {
-            course = courseRepository.getCourses().get(index);
-            return course;
+    public CourseImpl getCourse(int index) throws CourseNotFoundException {
+        CourseImpl courseImpl;
+        if ((courseRepository.getCoursesList().get(index) != null) && (courseRepository.getCoursesList().size() > index)) {
+            courseImpl = courseRepository.getCoursesList().get(index);
+            return courseImpl;
         } else {
             throw new CourseNotFoundException();
         }

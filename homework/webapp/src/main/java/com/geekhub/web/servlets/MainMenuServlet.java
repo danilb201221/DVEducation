@@ -24,8 +24,8 @@ public class MainMenuServlet extends HttpServlet {
         out.println("""
             <h>         What would you like to do? Choose the option you want:<br><br>
                         <a href="/courses?index=0">Show all courses (number and name)</a><br>
-                        Add new course<br>
-                        Delete course by number<br>
-                        <a href="/courses">Get course by number</a></h>""");
+                        Add new courseImpl<br>
+                        Delete courseImpl by number<br>
+                        <a href="/courses">Get courseImpl by number</a></h>""");
     }
 }

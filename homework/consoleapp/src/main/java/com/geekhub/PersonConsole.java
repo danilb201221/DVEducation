@@ -1,7 +1,7 @@
 package com.geekhub;
 
-import com.geekhub.course.Course;
-import com.geekhub.person.Person;
+import com.geekhub.course.CourseImpl;
+import com.geekhub.person.PersonImpl;
 import com.geekhub.person.PersonService;
 
 public class PersonConsole {
@@ -9,26 +9,26 @@ public class PersonConsole {
     ScannerHelper scannerHelper = new ScannerHelper();
     PersonService personService = new PersonService();
 
-    public Person getLecturer(Course course, int numLecturer) {
-        return personService.getLecturer(course, numLecturer);
+    public PersonImpl getLecturer(CourseImpl courseImpl, int numLecturer) {
+        return personService.getLecturer(courseImpl, numLecturer);
     }
 
-    public void displayStudentsList(Course course) {
-        System.out.println(personService.getStudentsList(course));
+    public void displayStudentsList(CourseImpl courseImpl) {
+        System.out.println(personService.getStudentsList(courseImpl));
 
     }
 
-    public StringBuffer getLecturersList(Course course) {
+    public StringBuffer getLecturersList(CourseImpl courseImpl) {
         StringBuffer result = new StringBuffer();
 
         return result;
     }
 
-    public void displayLecturersList(Course course) {
-        System.out.println(personService.getLecturersList(course));
+    public void displayLecturersList(CourseImpl courseImpl) {
+        System.out.println(personService.getLecturersList(courseImpl));
     }
 
-    public void addNewStudent(Course course) {
+    public void addNewStudent(CourseImpl courseImpl) {
         System.out.println("Add first name");
         String firstName = scannerHelper.getString();
         System.out.println("Add last name");
@@ -37,10 +37,10 @@ public class PersonConsole {
         String contacts = scannerHelper.getString();
         System.out.println("Add E-Mail");
         String email = scannerHelper.getString();
-        personService.addNewStudent(course, firstName, lastName, contacts, email);
+        personService.addNewStudent(courseImpl, firstName, lastName, contacts, email);
     }
 
-    public void addNewLecturer(Course course) {
+    public void addNewLecturer(CourseImpl courseImpl) {
         System.out.println("Add first name");
         String firstName = scannerHelper.getString();
         System.out.println("Add last name");
@@ -49,22 +49,22 @@ public class PersonConsole {
         String contacts = scannerHelper.getString();
         System.out.println("Add E-Mail");
         String email = scannerHelper.getString();
-        personService.addNewLecturer(course, firstName, lastName, contacts, email);
+        personService.addNewLecturer(courseImpl, firstName, lastName, contacts, email);
     }
 
-    public void deleteStudent(Course course) {
+    public void deleteStudent(CourseImpl courseImpl) {
         System.out.println("Enter first name");
         String firstName = scannerHelper.getString();
         System.out.println("Enter last name");
         String lastName = scannerHelper.getString();
-        personService.deleteStudent(course, firstName, lastName);
+        personService.deleteStudent(courseImpl, firstName, lastName);
     }
 
-    public void deleteLecturer(Course course) {
+    public void deleteLecturer(CourseImpl courseImpl) {
         System.out.println("Enter first name");
         String firstName = scannerHelper.getString();
         System.out.println("Enter last name");
         String lastName = scannerHelper.getString();
-        personService.deleteLecturer(course, firstName, lastName);
+        personService.deleteLecturer(courseImpl, firstName, lastName);
     }
 }

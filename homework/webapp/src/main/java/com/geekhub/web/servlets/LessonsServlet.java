@@ -1,17 +1,16 @@
 package com.geekhub.web.servlets;
 
-import com.geekhub.course.Course;
+import com.geekhub.course.CourseImpl;
 import com.geekhub.course.CourseService;
 import com.geekhub.dateTime.DateTimeService;
 import com.geekhub.exeptions.CourseNotFoundException;
 import com.geekhub.lesson.LessonService;
-import com.geekhub.person.Person;
+import com.geekhub.person.PersonImpl;
 import com.geekhub.person.PersonService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Optional;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -58,7 +57,7 @@ public class LessonsServlet extends HttpServlet {
         throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         try {
-            Course course = readCourse(req, resp);
+            CourseImpl courseImpl = readCourse(req, resp);
 
             int numberLesson = Integer.parseInt(req.getParameter("number-lesson"));
             String nameLesson = req.getParameter("name-lesson");
@@ -69,9 +68,9 @@ public class LessonsServlet extends HttpServlet {
 
             int lecturerIndex = Integer.parseInt("lecturer-index");
 
-            Person lecturer = personService.getLecturer(course, lecturerIndex);
+            PersonImpl lecturer = personService.getLecturer(courseImpl, lecturerIndex);
 
-            lessonService.addNewLesson(course, numberLesson, nameLesson, description, dateTime, lecturer);
+            lessonService.addNewLesson(courseImpl, numberLesson, nameLesson, description, dateTime, lecturer);
         } catch (CourseNotFoundException e) {
             e.printStackTrace();
         }
@@ -82,8 +81,8 @@ public class LessonsServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
         try {
             int index = Integer.parseInt(req.getParameter("number"));
-            Course course = readCourse(req, resp);
-            lessonService.deleteLesson(course, index);
+            CourseImpl courseImpl = readCourse(req, resp);
+            lessonService.deleteLesson(courseImpl, index);
         } catch (NumberFormatException e) {
             out.println("Not integer value");
         } catch (IndexOutOfBoundsException e) {
@@ -95,9 +94,9 @@ public class LessonsServlet extends HttpServlet {
 
     private void printLessonsList(HttpServletRequest req, HttpServletResponse resp, PrintWriter out) {
         try {
-            Course course = readCourse(req, resp);
+            CourseImpl courseImpl = readCourse(req, resp);
             StringBuilder lessonsList = new StringBuilder();
-            ArrayList<String> lessons = lessonService.getLessonsList(course);
+            ArrayList<String> lessons = lessonService.getLessonsList(courseImpl);
             for (String lesson : lessons) {
                 lessonsList
                     .append("<p>")
@@ -118,8 +117,8 @@ public class LessonsServlet extends HttpServlet {
 
         PrintWriter out = resp.getWriter();
         try {
-            Course course = readCourse(req, resp);
-            int lessonKey = course.getIdLessons().get(numberLesson - 1);
+            CourseImpl courseImpl = readCourse(req, resp);
+            int lessonKey = courseImpl.getIdLessons().get(numberLesson - 1);
 
             resp.sendRedirect(req.getContextPath() + "/lesson-menu?lesson=" + lessonKey);
         } catch (IOException e) {
@@ -129,7 +128,7 @@ public class LessonsServlet extends HttpServlet {
         }
     }
 
-    private Course readCourse(HttpServletRequest req, HttpServletResponse resp)
+    private CourseImpl readCourse(HttpServletRequest req, HttpServletResponse resp)
         throws IOException, CourseNotFoundException {
 
         int courseIndex = Integer.parseInt(req.getParameter("course-index"));

@@ -1,24 +1,24 @@
 package com.geekhub.person;
 
-import com.geekhub.course.Course;
+import com.geekhub.course.CourseImpl;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class LecturersRepository {
 
-    private Map<Integer, Person> lecturers = new HashMap<>();
+    private Map<Integer, PersonImpl> lecturers = new HashMap<>();
 
     public String toString(Integer hash) {
         return lecturers.get(hash).toString();
     }
 
-    public void addLecturer(Course course, Person lecturer) {
+    public void addLecturer(CourseImpl courseImpl, PersonImpl lecturer) {
         lecturers.put(lecturer.hashCode(), lecturer);
-        course.getIdStudents().add(lecturer.hashCode());
+        courseImpl.getIdStudents().add(lecturer.hashCode());
     }
 
-    public Map<Integer, Person> getLecturers() {
+    public Map<Integer, PersonImpl> getLecturers() {
         return lecturers;
     }
 }

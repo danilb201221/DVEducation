@@ -1,6 +1,6 @@
 package com.geekhub.web.servlets;
 
-import com.geekhub.course.Course;
+import com.geekhub.course.CourseImpl;
 import com.geekhub.course.CourseService;
 import com.geekhub.exeptions.CourseNotFoundException;
 import com.geekhub.person.PersonService;
@@ -52,7 +52,7 @@ public class StudentsServlet extends HttpServlet {
 
     }
 
-    private Course readCourse(HttpServletRequest req, HttpServletResponse resp)
+    private CourseImpl readCourse(HttpServletRequest req, HttpServletResponse resp)
         throws IOException, CourseNotFoundException {
 
         int courseIndex = Integer.parseInt(req.getParameter("course-index"));

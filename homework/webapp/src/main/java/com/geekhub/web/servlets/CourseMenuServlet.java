@@ -1,7 +1,6 @@
 package com.geekhub.web.servlets;
 
-import com.geekhub.course.Course;
-import com.geekhub.course.CourseService;
+import com.geekhub.courseImpl.CourseService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -10,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = {"/course-menu"})
+@WebServlet(urlPatterns = {"/courseImpl-menu"})
 public class CourseMenuServlet extends HttpServlet {
 
     private CourseService courseService;
@@ -30,15 +29,15 @@ public class CourseMenuServlet extends HttpServlet {
             <h>
             What would you like to do? Choose the option you want:<br><br>
             Show all lectures (number and name)<br>
-            Add new lesson<br>
-            Delete lesson by number<br>
-            Get lesson<br>
-            Show all student in this course<br>
-            Add new student in this course<br>
-            Delete student in this course<br>
-            Add many new student in this course<br>
-            Add new lecturer in this course<br>
-            Delete lecturer in this course<br>
+            Add new lessonImpl<br>
+            Delete lessonImpl by number<br>
+            Get lessonImpl<br>
+            Show all student in this courseImpl<br>
+            Add new student in this courseImpl<br>
+            Delete student in this courseImpl<br>
+            Add many new student in this courseImpl<br>
+            Add new lecturer in this courseImpl<br>
+            Delete lecturer in this courseImpl<br>
             </h>""");
     }
 

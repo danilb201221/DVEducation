@@ -1,82 +1,73 @@
 package com.geekhub.person;
 
-import com.geekhub.course.Course;
-import com.geekhub.exeptions.PersonNotFoundException;
+import com.geekhub.course.CourseImpl;
 
 public class PersonService {
 
     StudentsRepository studentsRepository = new StudentsRepository();
     LecturersRepository lecturersRepository = new LecturersRepository();
 
-    private Person person;
+    private PersonImpl personImpl;
 
     public PersonService() {
-        this.person = new Person();
+        this.personImpl = new PersonImpl();
     }
 
     public String toString() {
-        return person.getFirstName() + " " + person.getLastName();
+        String toString = personImpl.getFirstName() + " " + personImpl.getLastName();
+        return toString;
     }
 
-    public StringBuilder getStudentsList(Course course) {
+    public StringBuilder getStudentsList(CourseImpl courseImpl) {
         StringBuilder result = new StringBuilder();
-        for (int i = 0; i < course.getIdStudents().size() - 1; i++) {
-            Integer hash = course.getIdStudents().get(i);
+        for (int i = 0; i < courseImpl.getIdStudents().size() - 1; i++) {
+            Integer hash = courseImpl.getIdStudents().get(i);
             result.append(studentsRepository.toString(hash));
         }
         return result;
     }
 
-    public StringBuilder getLecturersList(Course course) {
+    public StringBuilder getLecturersList(CourseImpl courseImpl) {
         StringBuilder result = new StringBuilder();
-        for (int i = 0; i < course.getIdLecturers().size() - 1; i++) {
-            Integer hash = course.getIdLecturers().get(i);
+        for (int i = 0; i < courseImpl.getIdLecturers().size() - 1; i++) {
+            Integer hash = courseImpl.getIdLecturers().get(i);
             result.append(lecturersRepository.toString(hash));
         }
         return result;
     }
 
-    public void addNewStudent(Course course, String firstName, String lastName, String contacts, String email) {
-        Person student = new Person(Role.STUDENT, firstName, lastName, contacts, email);
-        studentsRepository.addStudent(course, student);
+    public void addNewStudent(CourseImpl courseImpl, String firstName, String lastName, String contacts, String email) {
+        PersonImpl student = new PersonImpl(firstName, lastName, email, Role.STUDENT);
+        studentsRepository.addStudent(courseImpl, student);
     }
 
-    public void addNewLecturer(Course course, String firstName, String lastName, String contacts, String email) {
-        Person lecturer = new Person(Role.TEACHER, firstName, lastName, contacts, email);
-        lecturersRepository.addLecturer(course, lecturer);
+    public void addNewLecturer(CourseImpl courseImpl, String firstName, String lastName, String contacts, String email) {
+        PersonImpl lecturer = new PersonImpl(firstName, lastName, email, Role.TEACHER);
+        lecturersRepository.addLecturer(courseImpl, lecturer);
     }
 
-    public void deleteStudent(Course course, String firstName, String lastName) {
-        for (int i = 0; i < course.getIdStudents().size(); i++) {
-            Integer hash = course.getIdStudents().get(i);
+    public void deleteStudent(CourseImpl courseImpl, String firstName, String lastName) {
+        for (int i = 0; i < courseImpl.getIdStudents().size(); i++) {
+            Integer hash = courseImpl.getIdStudents().get(i);
             if (studentsRepository.getStudents().get(hash).getFirstName().equals(firstName)) {
                 if (studentsRepository.getStudents().get(hash).getLastName().equals(lastName)) {
-                    course.getIdStudents().remove(hash);
+                    courseImpl.getIdStudents().remove(hash);
                 }
             }
-
         }
     }
 
-    public Person getLecturer(Course course, int numLecturer) {
-        Integer i = course.getIdLecturers().get(numLecturer);
+    public PersonImpl getLecturer(CourseImpl courseImpl, int numLecturer) {
+        Integer i = courseImpl.getIdLecturers().get(numLecturer);
         return lecturersRepository.getLecturers().get(i);
     }
 
-    public Person getLecturer(int lecturerIndex) throws PersonNotFoundException {
-        if ((lecturersRepository.getLecturers().get(lecturerIndex) != null) && (lecturersRepository.getLecturers().size() < lecturerIndex)) {
-            return lecturersRepository.getLecturers().get(lecturerIndex);
-        } else {
-            throw new PersonNotFoundException();
-        }
-    }
-
-    public void deleteLecturer(Course course, String firstName, String lastName) {
-        for (int i = 0; i < course.getIdLecturers().size(); i++) {
-            Integer hash = course.getIdLecturers().get(i);
+    public void deleteLecturer(CourseImpl courseImpl, String firstName, String lastName) {
+        for (int i = 0; i < courseImpl.getIdLecturers().size(); i++) {
+            Integer hash = courseImpl.getIdLecturers().get(i);
             if (lecturersRepository.getLecturers().get(hash).getFirstName().equals(firstName)) {
                 if (lecturersRepository.getLecturers().get(hash).getLastName().equals(lastName)) {
-                    course.getIdLessons().remove(hash);
+                    courseImpl.getIdLessons().remove(hash);
                 }
             }
         }

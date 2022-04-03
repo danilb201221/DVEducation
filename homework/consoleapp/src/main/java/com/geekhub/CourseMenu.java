@@ -1,6 +1,6 @@
 package com.geekhub;
 
-import com.geekhub.course.Course;
+import com.geekhub.courseImpl.CourseImpl;
 import com.geekhub.exeptions.LessonNotFoundException;
 
 public class CourseMenu {
@@ -15,42 +15,42 @@ public class CourseMenu {
 
             What would you like to do? Choose the option you want
             1. Show all lectures (number and name)
-            2. Add new lesson
-            3. Delete lesson by number
-            4. Get lesson
-            5. Show all student in this course
-            6. Add new student in this course
-            7. Delete student in this course
-            8. Add many new student in this course
-            9. Add new lecturer in this course
-            10. Delete lecturer in this course
+            2. Add new lessonImpl
+            3. Delete lessonImpl by number
+            4. Get lessonImpl
+            5. Show all student in this courseImpl
+            6. Add new student in this courseImpl
+            7. Delete student in this courseImpl
+            8. Add many new student in this courseImpl
+            9. Add new lecturer in this courseImpl
+            10. Delete lecturer in this courseImpl
             11. Back""");
     }
 
 
-    public void menuCourse(Course course) {
+    public void menuCourse(CourseImpl courseImpl) {
         String countMenu;
         boolean exitMenu = false;
         do {
             printMenuCourse();
             countMenu = scannerHelper.getString();
             switch (countMenu) {
-                case "1" -> lessonConsole.displayLessonsList(course);
-                case "2" -> lessonConsole.addNewLesson(course);
-                case "3" -> lessonConsole.deleteLesson(course);
+                case "1" -> lessonConsole.displayLessonsList(courseImpl);
+                case "2" -> lessonConsole.addNewLesson(courseImpl);
+                case "3" -> lessonConsole.deleteLesson(courseImpl);
                 case "4" -> {
                     try {
-                        lessonMenu.menuLesson(lessonConsole.getLesson(course));
+                        lessonMenu.menuLesson(lessonConsole.getLesson(courseImpl));
                     } catch (LessonNotFoundException e) {
                         System.err.println(e);
                     }
                 }
-                case "5" -> personConsole.displayStudentsList(course);
-                case "6" -> personConsole.addNewStudent(course);
-                case "7" -> personConsole.deleteStudent(course);
-                case "8" -> personConsole.displayLecturersList(course);
-                case "9" -> personConsole.addNewLecturer(course);
-                case "10" -> personConsole.deleteLecturer(course);
+                case "5" -> personConsole.displayStudentsList(courseImpl);
+                case "6" -> personConsole.addNewStudent(courseImpl);
+                case "7" -> personConsole.deleteStudent(courseImpl);
+                case "8" -> personConsole.displayLecturersList(courseImpl);
+                case "9" -> personConsole.addNewLecturer(courseImpl);
+                case "10" -> personConsole.deleteLecturer(courseImpl);
                 case "11" -> exitMenu = true;
                 default -> scannerHelper.notAvailable();
             }

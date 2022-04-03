@@ -1,12 +1,11 @@
 package com.geekhub.lesson;
 
-import com.geekhub.course.Course;
+import com.geekhub.course.CourseImpl;
 import com.geekhub.exeptions.LessonNotFoundException;
-import com.geekhub.person.Person;
+import com.geekhub.person.PersonImpl;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class LessonService {
 
@@ -14,58 +13,58 @@ public class LessonService {
     LessonsRepository lessonsRepository = new LessonsRepository();
 
 
-    public ArrayList<String> getLessonsList(Course course) {
+    public ArrayList<String> getLessonsList(CourseImpl courseImpl) {
         ArrayList<String> result = new ArrayList<>();
 
-        for (int i = 0; i < course.getIdLessons().size(); i++) {
-            Integer hash = course.getIdLessons().get(i);
-            Lesson lesson = lessonsRepository.getAllLessons().get(hash);
+        for (int i = 0; i < courseImpl.getIdLessons().size(); i++) {
+            Integer hash = courseImpl.getIdLessons().get(i);
+            LessonImpl lessonImpl = lessonsRepository.getAllLessons().get(hash);
 
-            String lessonInf = String.format("%d. %s", lesson.getNum(), lesson.getName());
+            String lessonInf = String.format("%d. %s", lessonImpl.getNum(), lessonImpl.getName());
             result.add(lessonInf);
         }
         return result;
     }
 
 
-    public void addNewLesson(Course course,
+    public void addNewLesson(CourseImpl courseImpl,
                              int numberLesson,
                              String nameLesson,
                              String description,
                              LocalDateTime date,
-                             Person lecturer) {
+                             PersonImpl lecturer) {
 
-        Lesson lesson = new Lesson(numberLesson, nameLesson, description, date, lecturer);
-        lessonsRepository.getAllLessons().put(lesson.hashCode(), lesson);
-        course.getIdLessons().add(lesson.hashCode());
+        LessonImpl lessonImpl = new LessonImpl(numberLesson, nameLesson, description, date, lecturer);
+        lessonsRepository.getAllLessons().put(lessonImpl.hashCode(), lessonImpl);
+        courseImpl.getIdLessons().add(lessonImpl.hashCode());
     }
 
 
-    public void deleteLesson(Course course, int index) throws IndexOutOfBoundsException, UnsupportedOperationException {
-        course.getIdLessons().remove(index);
+    public void deleteLesson(CourseImpl courseImpl, int index) throws IndexOutOfBoundsException, UnsupportedOperationException {
+        courseImpl.getIdLessons().remove(index);
     }
 
 
-    public Lesson getLesson(Course course, int numberLesson) throws LessonNotFoundException {
-        Lesson lesson = null;
-        for (int i = 0; i < course.getIdLessons().size(); i++) {
-            Integer hash = course.getIdLessons().get(i);
-            lesson = lessonsRepository.getAllLessons().get(hash);
-            if (validatorNumberLesson(lesson, numberLesson)) {
+    public LessonImpl getLesson(CourseImpl courseImpl, int numberLesson) throws LessonNotFoundException {
+        LessonImpl lessonImpl = null;
+        for (int i = 0; i < courseImpl.getIdLessons().size(); i++) {
+            Integer hash = courseImpl.getIdLessons().get(i);
+            lessonImpl = lessonsRepository.getAllLessons().get(hash);
+            if (validatorNumberLesson(lessonImpl, numberLesson)) {
                 break;
             }
         }
-        if (lesson != null) {
-            return lesson;
+        if (lessonImpl != null) {
+            return lessonImpl;
         } else {
             throw new LessonNotFoundException();
         }
     }
 
 
-    private boolean validatorNumberLesson(Lesson lesson, int requiredNumber) throws LessonNotFoundException {
+    private boolean validatorNumberLesson(LessonImpl lessonImpl, int requiredNumber) throws LessonNotFoundException {
         try {
-            int currentNumber = lesson.getNum();
+            int currentNumber = lessonImpl.getNum();
             return currentNumber == requiredNumber;
         } catch (Exception e) {
             throw new LessonNotFoundException();

@@ -1,48 +1,4 @@
 package com.geekhub.resource;
 
-
-public class Resource {
-    private String name;
-    private ResourceType type;
-    private String data;
-
-
-    @Override
-    public String toString() {
-        return String.format("Type: %s Name: %s\n", type, name);
-    }
-
-    public Resource() {
-
-    }
-
-    public Resource(ResourceType resourceType, String name, String data) {
-        this.type = resourceType;
-        this.name = name;
-        this.data = data;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public ResourceType getType() {
-        return type;
-    }
-
-    public void setType(ResourceType type) {
-        this.type = type;
-    }
-
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
+public interface Resource {
 }

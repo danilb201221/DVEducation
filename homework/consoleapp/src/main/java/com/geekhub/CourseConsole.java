@@ -1,6 +1,6 @@
 package com.geekhub;
 
-import com.geekhub.course.Course;
+import com.geekhub.course.CourseImpl;
 import com.geekhub.course.CourseService;
 import com.geekhub.exeptions.CourseNotFoundException;
 
@@ -39,11 +39,11 @@ public class CourseConsole {
         }
     }
 
-    public Course getCourse() throws NullPointerException, IndexOutOfBoundsException, CourseNotFoundException {
-        Course course;
+    public CourseImpl getCourse() throws NullPointerException, IndexOutOfBoundsException, CourseNotFoundException {
+        CourseImpl courseImpl;
         System.out.println("Enter the number of the course you want to get");
         int index = scannerHelper.getInt() - 1;
-        course = courseService.getCourse(index);
-        return course;
+        courseImpl = courseService.getCourse(index);
+        return courseImpl;
     }
 }

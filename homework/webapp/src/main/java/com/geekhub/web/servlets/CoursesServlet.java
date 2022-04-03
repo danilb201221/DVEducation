@@ -3,7 +3,6 @@ package com.geekhub.web.servlets;
 
 import com.geekhub.course.CourseService;
 import com.geekhub.exeptions.CourseNotFoundException;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;

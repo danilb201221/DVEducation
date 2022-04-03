@@ -1,15 +1,14 @@
 package com.geekhub;
 
-import com.geekhub.course.Course;
+import com.geekhub.course.CourseImpl;
 import com.geekhub.exeptions.LessonNotFoundException;
-import com.geekhub.lesson.Lesson;
+import com.geekhub.lesson.LessonImpl;
 import com.geekhub.lesson.LessonService;
-import com.geekhub.person.Person;
+import com.geekhub.person.PersonImpl;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 public class LessonConsole {
 
@@ -18,13 +17,13 @@ public class LessonConsole {
     PersonConsole personConsole = new PersonConsole();
     DateTimeConsole dateConsole = new DateTimeConsole();
 
-    public void displayLessonsList(Course course) {
-        for (int i = 0; i < lessonService.getLessonsList(course).size(); i++) {
-            System.out.println(lessonService.getLessonsList(course).get(i));
+    public void displayLessonsList(CourseImpl courseImpl) {
+        for (int i = 0; i < lessonService.getLessonsList(courseImpl).size(); i++) {
+            System.out.println(lessonService.getLessonsList(courseImpl).get(i));
         }
     }
 
-    public void addNewLesson(Course course) {
+    public void addNewLesson(CourseImpl courseImpl) {
         try {
             System.out.println("Add number");
             int number = scannerHelper.getInt();
@@ -38,12 +37,12 @@ public class LessonConsole {
             LocalDateTime date = dateConsole.addLocalDateTime();
 
             System.out.println("Add lecturer\n" +
-                personConsole.getLecturersList(course));
+                personConsole.getLecturersList(courseImpl));
             int numLecturer = scannerHelper.getInt();
 
-            Person lecturer = personConsole.getLecturer(course, numLecturer);
+            PersonImpl lecturer = personConsole.getLecturer(courseImpl, numLecturer);
 
-            lessonService.addNewLesson(course, number, name, description, date, lecturer);
+            lessonService.addNewLesson(courseImpl, number, name, description, date, lecturer);
 
         } catch (DateTimeParseException e) {
             System.out.println("Incorrect date-time format");
@@ -54,11 +53,11 @@ public class LessonConsole {
     }
 
 
-    public void deleteLesson(Course course) {
+    public void deleteLesson(CourseImpl courseImpl) {
         System.out.println("Enter the number of the lesson you want to delete");
         int index = scannerHelper.getInt() - 1;
         try {
-            lessonService.deleteLesson(course, index);
+            lessonService.deleteLesson(courseImpl, index);
         } catch (IndexOutOfBoundsException e) {
             System.err.println("Lesson with this number does not exist");
         } catch (UnsupportedOperationException e) {
@@ -66,10 +65,10 @@ public class LessonConsole {
         }
     }
 
-    public Lesson getLesson(Course course) throws LessonNotFoundException, NoSuchElementException {
+    public LessonImpl getLesson(CourseImpl courseImpl) throws LessonNotFoundException, NoSuchElementException {
         System.out.println("Enter the number of the lesson you want to get");
-        displayLessonsList(course);
+        displayLessonsList(courseImpl);
         int number = scannerHelper.getInt();
-        return lessonService.getLesson(course, number);
+        return lessonService.getLesson(courseImpl, number);
     }
 }

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xcd">
+
+    <bean id="contactService"
+          class="com.geekhub.contact.ContactService">
+    </bean>
+
+    <bean id="courseService"
+          class="com.geekhub.course.CourseService">
+    </bean>
+
+    <bean id="homeworkService"
+          class="com.geekhub.homework.HomeWorkService">
+    </bean>
+
+    <bean id="lessonService"
+          class="com.geekhub.lesson.LessonService">
+    </bean>
+
+    <bean id="personService"
+          class="com.geekhub.person.PersonService">
+    </bean>
+
+    <bean id="resourceService"
+          class="com.geekhub.resource.ResourceService">
+    </bean>
+
+    <bean id="contactRepository"
+          class="com.geekhub.contact.ContactRepository">
+    </bean>
+
+    <bean id="courseRepository"
+          class="com.geekhub.course.CourseRepository">
+    </bean>
+
+    <bean id="homeworkRepository"
+          class="com.geekhub.homework.HomeWorkRepository">
+    </bean>
+
+    <bean id="lessonRepository"
+          class="com.geekhub.lesson.LessonsRepository">
+    </bean>
+
+    <bean id="lecturersRepository"
+          class="com.geekhub.person.LecturersRepository">
+    </bean>
+
+    <bean id="studentsRepository"
+          class="com.geekhub.person.StudentsRepository">
+    </bean>
+
+    <bean id="resourceRepository"
+          class="com.geekhub.resource.ResourceService">
+    </bean>
+</beans>

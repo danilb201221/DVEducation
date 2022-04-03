@@ -13,9 +13,9 @@ public class MainMenu {
 
             What would you like to do? Choose the option you want
             1. Show all courses (number and name)
-            2. Add new course
-            3. Delete course by number
-            4. Get course by number
+            2. Add new courseImpl
+            3. Delete courseImpl by number
+            4. Get courseImpl by number
             5. Exit""");
     }
 

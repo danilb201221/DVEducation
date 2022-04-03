@@ -5,9 +5,9 @@ import java.util.Map;
 
 public class HomeWorkRepository {
 
-    private Map<Integer, HomeWork> homeWorks = new HashMap<>();
+    private Map<Integer, HomeWorkImpl> homeWorks = new HashMap<>();
 
-    public Map<Integer, HomeWork> getHomeWorks() {
+    public Map<Integer, HomeWorkImpl> getHomeWorks() {
         return homeWorks;
     }
 }

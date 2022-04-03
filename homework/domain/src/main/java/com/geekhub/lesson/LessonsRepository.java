@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class LessonsRepository {
 
-    private Map<Integer, Lesson> allLessons = new HashMap<>();
+    private Map<Integer, LessonImpl> allLessons = new HashMap<>();
 
 
     public String toString(Integer hash) {
@@ -13,7 +13,7 @@ public class LessonsRepository {
     }
 
 
-    public Map<Integer, Lesson> getAllLessons() {
+    public Map<Integer, LessonImpl> getAllLessons() {
         return allLessons;
     }
 }

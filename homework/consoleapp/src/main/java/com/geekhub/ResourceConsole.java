@@ -1,6 +1,6 @@
 package com.geekhub;
 
-import com.geekhub.lesson.Lesson;
+import com.geekhub.lesson.LessonImpl;
 import com.geekhub.resource.ResourceService;
 import com.geekhub.resource.ResourceType;
 
@@ -9,7 +9,7 @@ public class ResourceConsole {
     ScannerHelper scannerHelper = new ScannerHelper();
     ResourceService resourceService = new ResourceService();
 
-    public void addResource(Lesson lesson) {
+    public void addResource(LessonImpl lessonImpl) {
         ResourceType resourceType = null;
         System.out.println("Chose type resource:\n" +
             "1. Url\n" +
@@ -29,17 +29,17 @@ public class ResourceConsole {
         System.out.println("Get data");
         String data = scannerHelper.getString();
 
-        resourceService.addNewResource(lesson, resourceType, name, data);
+        resourceService.addNewResource(lessonImpl, resourceType, name, data);
     }
 
-    public void deleteResource(Lesson lesson) {
+    public void deleteResource(LessonImpl lessonImpl) {
         System.out.println("Get name resource");
         String name = scannerHelper.getString();
-        resourceService.deleteResource(lesson, name);
+        resourceService.deleteResource(lessonImpl, name);
     }
 
 
-    public void displayResourcesList(Lesson lesson) {
-        System.out.println(resourceService.getResourcesList(lesson));
+    public void displayResourcesList(LessonImpl lessonImpl) {
+        System.out.println(resourceService.getResourcesList(lessonImpl));
     }
 }
